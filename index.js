@@ -98,7 +98,9 @@ function DisplayTodos () {
         edit.addEventListener('click', e => {
             const input = content.querySelector('input');
             input.removeAttribute('readonly');
+            edit.innerHTML = 'Save';
             input.focus();
+            input.select();
             input.addEventListener('blur', e => {
                 input.setAttribute('readonly', true);
                 todo.content = e.target.value;
