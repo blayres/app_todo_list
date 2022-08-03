@@ -230,3 +230,14 @@ input:checked ~ .bubble::after {
     color: var(--grey);
 }
 
+@media only screen and (max-width: 600px){
+    
+	.todo-list .todo-item {
+        justify-content: space-evenly;
+    }
+
+    .todo-item .todo-content input {
+        margin-right: -45px;
+    }
+}
+
