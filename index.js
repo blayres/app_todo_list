@@ -40,8 +40,6 @@ function DisplayTodos() {
   todos.forEach((todo, index) => {
     const todoItem = document.createElement("div");
     todoItem.classList.add("todo-item");
-    todoItem.draggable = true;
-    todoItem.setAttribute("data-index", index);
 
     const label = document.createElement("label");
     const input = document.createElement("input");
@@ -116,7 +114,6 @@ function DisplayTodos() {
     });
 
     deleteButton.addEventListener("click", (e) => {
-      // Exibe uma caixa de diálogo de confirmação
       const confirmation = confirm(
         "Are you sure you want to delete this task?"
       );
@@ -127,49 +124,5 @@ function DisplayTodos() {
         DisplayTodos();
       }
     });
-
-    todoItem.addEventListener("dragstart", dragStart);
-    todoItem.addEventListener("dragover", dragOver);
-    todoItem.addEventListener("drop", drop);
   });
-}
-
-let dragSrcElement = null;
-
-function dragStart(e) {
-  dragSrcElement = this;
-  e.dataTransfer.effectAllowed = "move";
-  e.dataTransfer.setData("text/html", this.innerHTML);
-}
-
-function dragOver(e) {
-  if (e.preventDefault) {
-    e.preventDefault();
-  }
-  e.dataTransfer.dropEffect = "move";
-  return false;
-}
-
-function drop(e) {
-  if (e.stopPropagation) {
-    e.stopPropagation();
-  }
-  if (dragSrcElement !== this) {
-    dragSrcElement.innerHTML = this.innerHTML;
-    this.innerHTML = e.dataTransfer.getData("text/html");
-    updateTodoOrder();
-  }
-  return false;
-}
-
-function updateTodoOrder() {
-  const todoList = document.querySelector("#todo-list");
-  const todoItems = todoList.querySelectorAll(".todo-item");
-
-  todos = Array.from(todoItems).map((todoItem, index) => {
-    const todoIndex = parseInt(todoItem.getAttribute("data-index"));
-    return todos[todoIndex];
-  });
-
-  localStorage.setItem("todos", JSON.stringify(todos));
 }
