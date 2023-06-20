@@ -116,7 +116,7 @@ function DisplayTodos() {
     deleteButton.addEventListener("click", (e) => {
       // Exibe uma caixa de diálogo de confirmação
       const confirmation = confirm(
-        "Tem certeza de que deseja excluir esta tarefa?"
+        "Are you sure you want to delete this task?"
       );
 
       if (confirmation) {
